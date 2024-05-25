@@ -1,6 +1,6 @@
 "use server";
 
-import { createUser } from "@/db/queries";
+import { createUser, findUserByCredentials } from "@/db/queries";
 import { redirect } from "next/navigation";
 
 async function registerUser(formData) {
@@ -9,4 +9,16 @@ async function registerUser(formData) {
   redirect("/login");
 }
 
-export { registerUser };
+async function performLogin(formData) {
+  try {
+    const credential = {};
+    credential.email = formData.get("email");
+    credential.password = formData.get("password");
+    const found = await findUserByCredentials(credential);
+    return found;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export { performLogin, registerUser };
