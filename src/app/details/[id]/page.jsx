@@ -4,6 +4,18 @@ import HeroSection from "@/components/details/HeroSection";
 
 import { getEventById } from "@/db/queries";
 
+export async function generateMetadata({ params: { id } }) {
+  const eventInfo = await getEventById(id);
+
+  return {
+    title: `GoEvent - ${eventInfo?.name}`,
+    description: eventInfo?.details,
+    openGraph: {
+      images: [eventInfo?.imageUrl],
+    },
+  };
+}
+
 const EventDetailsPage = async ({ params: { id } }) => {
   const eventInfo = await getEventById(id);
 
