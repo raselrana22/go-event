@@ -1,5 +1,6 @@
 import { eventModel } from "@/models/event.models";
 import { userModel } from "@/models/user-models";
+import { dbConnectMongo } from "@/services/mongo";
 
 import {
   replaceMongoIdInArray,
@@ -8,6 +9,7 @@ import {
 import mongoose from "mongoose";
 
 async function getAllEvents(query) {
+  await dbConnectMongo();
   let allEvents = [];
   if (query) {
     const regex = new RegExp(query, "i");

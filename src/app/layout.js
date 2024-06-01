@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import AuthProvider from "./providers/AuthProvider";
 
-import { dbConnect } from "@/services/mongo";
+import { dbConnectMongo } from "@/services/mongo";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -14,7 +14,7 @@ export const metadata = {
 };
 
 export default async function RootLayout({ children }) {
-  await dbConnect();
+  await dbConnectMongo();
 
   return (
     <html lang="en">
