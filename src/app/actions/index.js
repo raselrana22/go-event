@@ -44,8 +44,7 @@ async function addInterestedEvent(eventId, authId) {
 async function addGoingEvent(eventId, user) {
   try {
     await updateGoing(eventId, user?.id);
-
-    await sendEmail(eventId, user);
+    // await sendEmail(eventId, user);
   } catch (error) {
     throw error;
   }
